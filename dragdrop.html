@@ -105,6 +105,43 @@
         </div>
     </div>
     <script>
+        //        let draggedCard;
+        //        let originalIndex;
+        //        let currentIndex;
+
+        //        function allowDrop(event) {
+        //            event.preventDefault();
+        //        }
+
+        //        function drag(event) {
+        //            draggedCard = event.target;
+        //            originalIndex = parseInt(draggedCard.dataset.index);
+        //        }
+
+        //        function drop(event) {
+        //            event.preventDefault();
+        //            let targetCard = event.target;
+        //            while (!targetCard.classList.contains('card')) {
+        //        //        targetCard = targetCard.parentNode;
+        //            }
+        //            currentIndex = parseInt(targetCard.dataset.index);
+        //            if (draggedCard !== targetCard) {
+        //        //        const temp = draggedCard.outerHTML;
+        //        //        draggedCard.outerHTML = targetCard.outerHTML;
+        //        //        targetCard.outerHTML = temp;
+        //        //        draggedCard = document.querySelector(`[data-index="${originalIndex}"]`);
+        //        //        draggedCard.dataset.index = currentIndex;
+        //        //        targetCard = document.querySelector(`[data-index="${currentIndex}"]`);
+        //        //        targetCard.dataset.index = originalIndex;
+        //            }
+        //        }
+
+        //        const draggableCards = document.querySelectorAll('.draggable');
+        //        draggableCards.forEach(card => {
+        //            card.addEventListener('dragstart', drag);
+        //        });
+
+        //Mobile
         let draggedCard;
         let originalIndex;
         let currentIndex;
@@ -113,14 +150,19 @@
             event.preventDefault();
         }
 
-        function drag(event) {
+        function touchStart(event) {
             draggedCard = event.target;
             originalIndex = parseInt(draggedCard.dataset.index);
+            draggedCard.style.opacity = '0.5';
         }
 
-        function drop(event) {
+        function touchEnd(event) {
+            draggedCard.style.opacity = '1';
+        }
+
+        function touchMove(event) {
             event.preventDefault();
-            let targetCard = event.target;
+            let targetCard = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY);
             while (!targetCard.classList.contains('card')) {
                 targetCard = targetCard.parentNode;
             }
@@ -138,7 +180,9 @@
 
         const draggableCards = document.querySelectorAll('.draggable');
         draggableCards.forEach(card => {
-            card.addEventListener('dragstart', drag);
+            card.addEventListener('touchstart', touchStart);
+            card.addEventListener('touchend', touchEnd);
+            card.addEventListener('touchmove', touchMove);
         });
     </script>
 </body>
