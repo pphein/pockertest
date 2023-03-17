@@ -103,11 +103,18 @@
                 <div class="card draggable" draggable="true" data-index="4"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
             </div>
             <div class="hand" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <div class="card draggable" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="0"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
-                <div class="card draggable" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="1"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
-                <div class="card draggable" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="2"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
-                <div class="card draggable" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="3"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
-                <div class="card draggable" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="4"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="0"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="1"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="2"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="3"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="4"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
+            </div>
+            <div class="hand" ondragover="handleCardDragStart(event)" ondrop="handleCardDrop(event)">
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="0"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="1"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="2"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="3"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
+                <div class="card draggable" draggable="true" draggable="true" draggable="true" draggable="true" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="4"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
             </div>
 
         </div>
@@ -193,52 +200,121 @@
         //            card.addEventListener('touchmove', touchMove);
         //        });
 
-        let draggedCard;
-        let originalIndex;
-        let currentIndex;
-        let touchStartX;
-        let touchStartY;
+        //    //    let draggedCard;
+        //    //    let originalIndex;
+        //    //    let currentIndex;
+        //    //    let touchStartX;
+        //    //    let touchStartY;
 
-        function allowDrop(event) {
-            event.preventDefault();
-        }
+        //    //    function allowDrop(event) {
+        //    //    //    event.preventDefault();
+        //    //    }
 
-        function drag(event) {
-            event.preventDefault();
-            draggedCard = event.target;
-            originalIndex = parseInt(draggedCard.dataset.index);
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
-        }
+        //    //    function drag(event) {
+        //    //    //    event.preventDefault();
+        //    //    //    draggedCard = event.target;
+        //    //    //    originalIndex = parseInt(draggedCard.dataset.index);
+        //    //    //    touchStartX = event.touches[0].clientX;
+        //    //    //    touchStartY = event.touches[0].clientY;
+        //    //    }
 
-        function touchMove(event) {
-            event.preventDefault();
-            draggedCard.style.transform = `translate(${event.touches[0].clientX - touchStartX}px, ${event.touches[0].clientY - touchStartY}px)`;
-        }
+        //    //    function touchMove(event) {
+        //    //    //    event.preventDefault();
+        //    //    //    draggedCard.style.transform = `translate(${event.touches[0].clientX - touchStartX}px, ${event.touches[0].clientY - touchStartY}px)`;
+        //    //    }
 
-        function touchEnd(event) {
-            event.preventDefault();
-            let targetCard = document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-            while (!targetCard.classList.contains('card')) {
-                targetCard = targetCard.parentNode;
+        //    //    function touchEnd(event) {
+        //    //    //    event.preventDefault();
+        //    //    //    let targetCard = document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+        //    //    //    while (!targetCard.classList.contains('card')) {
+        //    //    //    //    targetCard = targetCard.parentNode;
+        //    //    //    }
+        //    //    //    currentIndex = parseInt(targetCard.dataset.index);
+        //    //    //    if (draggedCard !== targetCard) {
+        //    //    //    //    const temp = draggedCard.outerHTML;
+        //    //    //    //    draggedCard.outerHTML = targetCard.outerHTML;
+        //    //    //    //    targetCard.outerHTML = temp;
+        //    //    //    //    draggedCard = document.querySelector(`[data-index="${originalIndex}"]`);
+        //    //    //    //    draggedCard.dataset.index = currentIndex;
+        //    //    //    //    targetCard = document.querySelector(`[data-index="${currentIndex}"]`);
+        //    //    //    //    targetCard.dataset.index = originalIndex;
+        //    //    //    }
+        //    //    //    draggedCard.style.transform = '';
+        //    //    }
+
+        //    //    const draggableCards = document.querySelectorAll('.draggable');
+        //    //    draggableCards.forEach(card => {
+        //    //    //    card.addEventListener('dragstart', drag);
+        //    //    });
+        function handleCardDragStart(event) {
+            if (event.type === 'touchstart') {
+                touchPos = {
+                    x: event.touches[0].clientX,
+                    y: event.touches[0].clientY
+                }
+            } else {
+                mousePos = {
+                    x: event.clientX,
+                    y: event.clientY
+                }
             }
-            currentIndex = parseInt(targetCard.dataset.index);
-            if (draggedCard !== targetCard) {
-                const temp = draggedCard.outerHTML;
-                draggedCard.outerHTML = targetCard.outerHTML;
-                targetCard.outerHTML = temp;
-                draggedCard = document.querySelector(`[data-index="${originalIndex}"]`);
-                draggedCard.dataset.index = currentIndex;
-                targetCard = document.querySelector(`[data-index="${currentIndex}"]`);
-                targetCard.dataset.index = originalIndex;
-            }
-            draggedCard.style.transform = '';
+
+            const card = event.target.closest('.card');
+            if (!card) return;
+
+            event.dataTransfer.setData("text/plain", card.dataset.cardIndex);
+
+            card.classList.add("dragging");
         }
 
-        const draggableCards = document.querySelectorAll('.draggable');
-        draggableCards.forEach(card => {
-            card.addEventListener('dragstart', drag);
-        });
+        function handleCardDragOver(event) {
+            event.preventDefault();
+        }
+
+        function handleCardDrop(event) {
+            event.preventDefault();
+
+            const card = event.target.closest('.card');
+            const dropZone = event.target.closest('.drop-zone');
+
+            if (!card || !dropZone) return;
+
+            const cardIndex = event.dataTransfer.getData("text/plain");
+            const newCardIndex = dropZone.dataset.cardIndex;
+
+            if (cardIndex === newCardIndex) return;
+
+            if (event.type === 'touchend') {
+                const deltaX = touchPos.x - event.changedTouches[0].clientX;
+                const deltaY = touchPos.y - event.changedTouches[0].clientY;
+                if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+                    return;
+                }
+            } else {
+                const deltaX = mousePos.x - event.clientX;
+                const deltaY = mousePos.y - event.clientY;
+                if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+                    return;
+                }
+            }
+
+            const oldCardElement = document.querySelector(`[data-card-index="${cardIndex}"]`);
+            const newCardElement = document.querySelector(`[data-card-index="${newCardIndex}"]`);
+
+            if (!oldCardElement || !newCardElement) return;
+
+            const oldCard = playerCards[activePlayer][cardIndex];
+            const newCard = playerCards[activePlayer][newCardIndex];
+
+            playerCards[activePlayer][cardIndex] = newCard;
+            playerCards[activePlayer][newCardIndex] = oldCard;
+
+            oldCardElement.dataset.cardIndex = newCardIndex;
+            newCardElement.dataset.cardIndex = cardIndex;
+
+            oldCardElement.parentNode.replaceChild(newCardElement, oldCardElement);
+            dropZone.parentNode.replaceChild(oldCardElement, dropZone);
+        }
     </script>
 </body>
 
