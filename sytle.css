@@ -1,0 +1,26 @@
+#game-container {
+    width: 800px;
+    height: 600px;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.player {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-right: 10px;
+}

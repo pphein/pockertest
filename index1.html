@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>13 Cards Poker</title>
+    <style>
+        /* Styles for the poker table go here */
+    </style>
+</head>
+
+<body>
+    <h1>13 Cards Poker</h1>
+    <div id="gameTable">
+        <!-- HTML for the poker table goes here -->
+    </div>
+    <div id="gameControls">
+        <button id="dealCards">Deal Cards</button>
+        <button id="placeBet">Place Bet</button>
+        <button id="fold">Fold</button>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('connect', () => {
+            alert('Connected to server');
+        });
+
+        socket.on('disconnect', () => {
+            alert('Disconnected from server');
+        });
+
+        socket.on('playerJoined', (players) => {
+            alert('Player joined the game');
+            // Code to update the player list on the HTML page goes here
+        });
+
+        socket.on('playerLeft', (players) => {
+            alert('Player left the game');
+            // Code to update the player list on the HTML page goes here
+        });
+
+        socket.on('gameData', (gameData) => {
+            alert('Game data updated');
+            // Code to update the game table on the HTML page goes here
+        });
+
+        document.getElementById('dealCards').addEventListener('click', () => {
+            alert('Deal cards button clicked');
+            socket.emit('gameAction', 'dealCards');
+        });
+
+        document.getElementById('placeBet').addEventListener('click', () => {
+            alert('Place bet button clicked');
+            const betAmount = parseInt(prompt('Enter bet amount:'));
+            socket.emit('gameAction', 'placeBet', betAmount);
+        });
+
+        document.getElementById('fold').addEventListener('click', () => {
+            alert('Fold button clicked');
+            socket.emit('gameAction', 'fold');
+        });
+
+        // Code to handle other game actions goes here
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>13 Cards Poker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dae0da;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .card {
+            width: 80px;
+            height: 120px;
+            margin: 0 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .hand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .player-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .chips {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .action-buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .action-buttons button:hover {
+            background-color: #d3d3d3;
+        }
+        
+        .player {
+            width: 300px;
+            margin: 0 20px;
+        }
+        
+        .cover {
+            width: 80px;
+            height: 120px;
+            margin: 0 10px;
+            background-color: #888;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="player">
+            <div class="player-name">Player 1</div>
+            <div class="chips">Chips: 100</div>
+            <div class="hand">
+                <div class="card"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
+                <div class="card"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
+                <div class="card"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
+                <div class="card"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
+                <div class="card"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
+            </div>
+            <div class="action-buttons">
+                <button>Take Card</button>
+                <button>Throw Card</button>
+            </div>
+        </div>
+
+        <div class="hand" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <div class="card draggable" draggable="true"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
+            <div class="card draggable" draggable="true"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
+            <div class="card draggable" draggable="true"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
+            <div class="card draggable" draggable="true"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
+            <div class="card draggable" draggable="true"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
+        </div>
+
+    </div>
+    <script>
+        let draggedCard;
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            draggedCard = event.target;
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            let targetCard = event.target;
+            while (!targetCard.classList.contains('card')) {
+                targetCard = targetCard.parentNode;
+            }
+            if (draggedCard !== targetCard) {
+                const temp = draggedCard.outerHTML;
+                draggedCard.outerHTML = targetCard.outerHTML;
+                targetCard.outerHTML = temp;
+            }
+        }
+
+        const draggableCards = document.querySelectorAll('.draggable');
+        draggableCards.forEach(card => {
+            card.addEventListener('dragstart', drag);
+        });
+    </script>
+</body>
+
+</html>
