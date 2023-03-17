@@ -96,27 +96,12 @@
             <div class="player-name">Player 1</div>
             <div class="chips">Chips: 100</div>
             <div class="hand" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <div class="card draggable" draggable="true" data-index="0"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
-                <div class="card draggable" draggable="true" data-index="1"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
-                <div class="card draggable" draggable="true" data-index="2"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
-                <div class="card draggable" draggable="true" data-index="3"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
-                <div class="card draggable" draggable="true" data-index="4"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
+                <div class="card draggable" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="0"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
+                <div class="card draggable" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="1"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
+                <div class="card draggable" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="2"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
+                <div class="card draggable" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="3"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
+                <div class="card draggable" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="4"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
             </div>
-            <div class="hand" ondragover="allowDrop(event)" ondrop="drop(event)">
-                <div class="card draggable" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="0"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
-                <div class="card draggable" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="1"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
-                <div class="card draggable" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="2"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
-                <div class="card draggable" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="3"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
-                <div class="card draggable" draggable="true" ontouchstart="drag(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="4"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
-            </div>
-            <div class="hand" ondragover="handleCardDragStart(event)" ondrop="handleCardDrop(event)">
-                <div class="card draggable" draggable="true" ontouchstart="handleCardDragOver(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="0"><img src="cards/ace_of_spades.png" alt="Ace of Spades"></div>
-                <div class="card draggable" draggable="true" ontouchstart="handleCardDragOver(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="1"><img src="cards/king_of_spades.png" alt="King of Spades"></div>
-                <div class="card draggable" draggable="true" ontouchstart="handleCardDragOver(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="2"><img src="cards/queen_of_spades.png" alt="Queen of Spades"></div>
-                <div class="card draggable" draggable="true" ontouchstart="handleCardDragOver(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="3"><img src="cards/jack_of_spades.png" alt="Jack of Spades"></div>
-                <div class="card draggable" draggable="true" ontouchstart="handleCardDragOver(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" data-index="4"><img src="cards/ten_of_spades.png" alt="Ten of Spades"></div>
-            </div>
-
         </div>
     </div>
     <script>
@@ -157,48 +142,71 @@
         //        });
 
         //Mobile
-        //        let draggedCard;
-        //        let originalIndex;
-        //        let currentIndex;
+        let draggedCard;
+        let originalIndex;
+        let currentIndex;
 
-        //        function allowDrop(event) {
-        //            event.preventDefault();
-        //        }
+        function allowDrop(event) {
+            event.preventDefault();
+        }
 
-        //        function touchStart(event) {
-        //            draggedCard = event.target;
-        //            originalIndex = parseInt(draggedCard.dataset.index);
-        //            draggedCard.style.opacity = '0.5';
-        //        }
+        function drag(event) {
+            draggedCard = event.target;
+            originalIndex = parseInt(draggedCard.dataset.index);
+        }
 
-        //        function touchEnd(event) {
-        //            draggedCard.style.opacity = '1';
-        //        }
+        function drop(event) {
+            event.preventDefault();
+            let targetCard = event.target;
+            while (!targetCard.classList.contains('card')) {
+                targetCard = targetCard.parentNode;
+            }
+            currentIndex = parseInt(targetCard.dataset.index);
+            if (draggedCard !== targetCard) {
+                const temp = draggedCard.outerHTML;
+                draggedCard.outerHTML = targetCard.outerHTML;
+                targetCard.outerHTML = temp;
+                draggedCard = document.querySelector(`[data-index="${originalIndex}"]`);
+                draggedCard.dataset.index = currentIndex;
+                targetCard = document.querySelector(`[data-index="${currentIndex}"]`);
+                targetCard.dataset.index = originalIndex;
+            }
+        }
 
-        //        function touchMove(event) {
-        //            event.preventDefault();
-        //            let targetCard = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY);
-        //            while (!targetCard.classList.contains('card')) {
-        //        //        targetCard = targetCard.parentNode;
-        //            }
-        //            currentIndex = parseInt(targetCard.dataset.index);
-        //            if (draggedCard !== targetCard) {
-        //        //        const temp = draggedCard.outerHTML;
-        //        //        draggedCard.outerHTML = targetCard.outerHTML;
-        //        //        targetCard.outerHTML = temp;
-        //        //        draggedCard = document.querySelector(`[data-index="${originalIndex}"]`);
-        //        //        draggedCard.dataset.index = currentIndex;
-        //        //        targetCard = document.querySelector(`[data-index="${currentIndex}"]`);
-        //        //        targetCard.dataset.index = originalIndex;
-        //            }
-        //        }
+        function touchStart(event) {
+            draggedCard = event.target;
+            originalIndex = parseInt(draggedCard.dataset.index);
+            draggedCard.style.opacity = '0.5';
+        }
 
-        //        const draggableCards = document.querySelectorAll('.draggable');
-        //        draggableCards.forEach(card => {
-        //            card.addEventListener('touchstart', touchStart);
-        //            card.addEventListener('touchend', touchEnd);
-        //            card.addEventListener('touchmove', touchMove);
-        //        });
+        function touchEnd(event) {
+            draggedCard.style.opacity = '1';
+        }
+
+        function touchMove(event) {
+            event.preventDefault();
+            let targetCard = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY);
+            while (!targetCard.classList.contains('card')) {
+                targetCard = targetCard.parentNode;
+            }
+            currentIndex = parseInt(targetCard.dataset.index);
+            if (draggedCard !== targetCard) {
+                const temp = draggedCard.outerHTML;
+                draggedCard.outerHTML = targetCard.outerHTML;
+                targetCard.outerHTML = temp;
+                draggedCard = document.querySelector(`[data-index="${originalIndex}"]`);
+                draggedCard.dataset.index = currentIndex;
+                targetCard = document.querySelector(`[data-index="${currentIndex}"]`);
+                targetCard.dataset.index = originalIndex;
+            }
+        }
+
+        const draggableCards = document.querySelectorAll('.draggable');
+        draggableCards.forEach(card => {
+            card.addEventListener('touchstart', touchStart);
+            card.addEventListener('touchend', touchEnd);
+            card.addEventListener('touchmove', touchMove);
+        });
 
         //    //    let draggedCard;
         //    //    let originalIndex;
